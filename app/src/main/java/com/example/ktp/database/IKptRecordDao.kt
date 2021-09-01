@@ -10,6 +10,12 @@ import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface IKptRecordDao : IRepositoryDao<KptRecord> {
+    @Query("SELECT * from kptrecord WHERE id=(:id)")
+    override fun get(id: Int): Observable<KptRecord>
+
+    @Query("DELETE from kptrecord")
+    fun deleteAll()
+
     @Query("SELECT * from KptRecord")
     fun getAll1() : Flowable<KptRecord>
 

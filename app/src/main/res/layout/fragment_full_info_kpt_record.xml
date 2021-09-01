@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fill_color_main">
+
+    <include layout="@layout/top_app_bar" android:id="@+id/top_app_bar"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/mainLinearLayout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/option_add_with_text" android:id="@+id/situation"/>
+            <include layout="@layout/option_add_with_text" android:id="@+id/automaticThought" />
+            <include layout="@layout/option_add_with_numbers" android:id="@+id/truthOfThought" />
+            <include layout="@layout/option_add_with_words" android:id="@+id/emotionalReactions" />
+            <include layout="@layout/option_add_with_text" android:id="@+id/bodilyReactions" />
+            <include layout="@layout/option_add_with_text" android:id="@+id/behavior" />
+            <include layout="@layout/option_add_with_words" android:id="@+id/thinkingErrors" />
+
+            <FrameLayout
+                android:id="@+id/mainFrameLayout"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/option_add_background"
+                android:layout_marginVertical="10dp">
+
+                <Button
+                    android:id="@+id/finish"
+                    android:paddingHorizontal="25dp"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Завершить"/>
+
+            </FrameLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

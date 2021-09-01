@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Ktp</string>
+    <string name="sample_text1">Все очень плохо и очень плохо и очень и очень плохо и
+        очень плохо и очень плохо и очень плохо</string>
+    <string name="situation">Ситуация</string>
+    <string name="automaticThought">Автоматическая мысль</string>
+    <string name="emotionalReactions">Эмоциональные реакции</string>
+    <string name="bodilyReactions">Телесные реакции</string>
+    <string name="behavior">Поведение</string>
+    <string name="truthOfThought">Истинность мысли</string>
+    <string name="thinkingErrors">Ошибки мышления</string>
 </resources>

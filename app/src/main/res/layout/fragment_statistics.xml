@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fill_color_main">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/option_add_with_words" android:id="@+id/emotionalReactions" />
+        <include layout="@layout/option_add_with_words" android:id="@+id/thinkingErrors" />
+
+    </LinearLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>

@@ -10,6 +10,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 interface IRepositoryDao<T> {
+    fun get(id: Int): Observable<T>
+
     fun getAll() : Observable<List<T>>
 
     fun insert(element: T)

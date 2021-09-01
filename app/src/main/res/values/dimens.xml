@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_std">18</dimen>
+    <dimen name="main_kpt_element_height">200dp</dimen>
+    <dimen name="main_kpt_element_text_height">150dp</dimen>
+</resources>

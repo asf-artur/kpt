@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ktp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Ktp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryVariant">@color/fill_color_main</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -12,5 +12,25 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="materialButtonStyle">@style/buttons</item>
+    </style>
+
+    <style name="buttons" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button</item>
+        <item name="android:backgroundTint">@color/fill_color_main</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="toggle_button" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:background">@drawable/toggle_button</item>
+        <item name="android:backgroundTint">@color/fill_color_main</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="textViews" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/text_color_main</item>
     </style>
 </resources>

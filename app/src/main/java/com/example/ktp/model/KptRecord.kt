@@ -9,7 +9,6 @@ import java.util.*
  */
 @Entity
 class KptRecord(
-    @PrimaryKey val id: Int,
     /**
      * Ситуация
      */
@@ -22,7 +21,7 @@ class KptRecord(
     /**
      * Телесные реакции
      */
-    val bodilyReactions: List<String>?,
+    val bodilyReactions: String?,
     val behavior: String?,
     val truthOfThought: Double?,
     /**
@@ -31,4 +30,6 @@ class KptRecord(
     val thinkingErrors: List<ThinkingError>?,
     val creationDate: Calendar,
     val changeDate: Calendar,
-)
+){
+    @PrimaryKey(autoGenerate = true) var id: Int? = null
+}

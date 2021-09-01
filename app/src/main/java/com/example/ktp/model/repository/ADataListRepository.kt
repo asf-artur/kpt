@@ -15,7 +15,11 @@ abstract class ADataListRepository<T>() {
     protected abstract val dao: IRepositoryDao<T>
     private var _data: MutableList<T> = mutableListOf()
 
-    private val executor = Executors.newSingleThreadExecutor()
+    protected val executor = Executors.newSingleThreadExecutor()
+
+    fun get(id: Int): Observable<T> {
+        return dao.get(id)
+    }
 
     fun getAll(): Observable<List<T>> {
         return dao.getAll()
@@ -39,8 +43,10 @@ abstract class ADataListRepository<T>() {
 
     open fun remove(element: T){
         try {
-            _data.remove(element)
-            dao.delete(element)
+            executor.execute {
+                _data.remove(element)
+                dao.delete(element)
+            }
         }
         catch (e: Exception) {
         }

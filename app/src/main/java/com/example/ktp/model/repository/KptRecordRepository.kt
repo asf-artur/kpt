@@ -28,7 +28,9 @@ class KptRecordRepository()
     ).build()
     override val dao = database.kptDao()
 
-    fun getAll1(): Flowable<KptRecord> {
-        return dao.getAll1()
+    fun deleteAll(){
+        executor.execute {
+            dao.deleteAll()
+        }
     }
 }

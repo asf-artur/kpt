@@ -33,7 +33,10 @@ class KptRecordTypeConverters{
 
     @TypeConverter
     fun fromListString(listOfString: List<String>?): String?{
-        return gson.toJson(listOfString)
+        if(listOfString == null){
+            return null
+        }
+        return gson.toJson(JsonListString(listOfString))
     }
 
     @TypeConverter
@@ -47,7 +50,10 @@ class KptRecordTypeConverters{
 
     @TypeConverter
     fun fromThinkingErrorList(thinkingErrorList: List<ThinkingError>?): String?{
-        return gson.toJson(thinkingErrorList)
+        if(thinkingErrorList == null){
+            return null
+        }
+        return gson.toJson(JsonListThinkingError(thinkingErrorList))
     }
 
     @TypeConverter
