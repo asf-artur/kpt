@@ -1,4 +1,4 @@
-package com.example.ktp.ui
+package com.example.ktp.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import com.example.ktp.databinding.FragmentAddKptThoughtBinding
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.StringBoolean
 import com.example.ktp.model.toRusString
+import com.example.ktp.ui.BaseFragmentWithBinding
+import com.example.ktp.ui.IFragmentTransactions
 import com.example.ktp.utils.UiKptRecordHelper
 import javax.inject.Inject
 

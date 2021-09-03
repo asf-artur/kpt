@@ -1,4 +1,4 @@
-package com.example.ktp.ui
+package com.example.ktp.ui.fragments
 
 import android.animation.ObjectAnimator
 import android.content.Intent
@@ -14,11 +14,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ktp.App
 import com.example.ktp.R
 import com.example.ktp.databinding.FragmentMainBinding
+import com.example.ktp.ui.BaseFragmentWithBinding
+import com.example.ktp.ui.IFragmentTransactions
 import com.example.ktp.ui.adapters.KptRecordsAdapter
 import com.example.ktp.viewmodels.MainFragmentViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import org.apache.poi.xssf.usermodel.XSSFWorkbook
 import java.io.File
 

@@ -16,8 +16,7 @@ import com.example.ktp.model.KptRecord
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.KptRecordRepository
 import com.example.ktp.model.repository.StringBoolean
-import com.example.ktp.ui.IFragmentTransactions
-import com.example.ktp.ui.MainFragment
+import com.example.ktp.ui.fragments.MainFragment
 import com.example.ktp.ui.adapters.AddKptThoughtAdapter
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
