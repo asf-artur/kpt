@@ -1,14 +1,18 @@
 package com.example.ktp.utils
 
 import android.content.Context
+import android.content.res.Resources
 import android.view.View
 import android.widget.*
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ktp.R
 import com.example.ktp.constants.ThinkingErrorsConstants
+import com.example.ktp.databinding.OptionAddMinimizedBinding
 import com.example.ktp.databinding.OptionAddWithNumbersBinding
 import com.example.ktp.databinding.OptionAddWithTextBinding
 import com.example.ktp.databinding.OptionAddWithWordsBinding
@@ -79,12 +83,12 @@ class UiKptRecordHelper @Inject constructor (
                 })
             }
 
-        setupViewWithRecyclerView(context, emotionalReactionsBinding.root, emotionalReactionsMap)
-        setupViewWithRecyclerView(context, thinkingErrorsBinding.root, thinkingErrorsMap)
+        setupViewWithRecyclerView(context, emotionalReactionsBinding.recyclerView, emotionalReactionsMap)
+        setupViewWithRecyclerView(context, thinkingErrorsBinding.recyclerView, thinkingErrorsMap)
 
 
         for (i in optionViewList.indices){
-            setupKptOptionView(optionViewList[i], namesList[i])
+            setupKptOptionView(optionViewList[i], namesList[i], context)
         }
 
         finishButton.setOnClickListener {
@@ -103,15 +107,19 @@ class UiKptRecordHelper @Inject constructor (
         }
     }
 
-    private fun setupViewWithRecyclerView(context: Context, parentView: View, items: List<StringBoolean>){
-        val recyclerView = parentView.findViewById<LinearLayout>(R.id.content)
-            .findViewById<RecyclerView>(R.id.recyclerView)
+    fun setMinimizeButtonDrawable(visible: Boolean, imageView: ImageView, context: Context){
+        when(visible){
+            true -> imageView.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_horizontal_rule))
+            false -> imageView.setImageDrawable(AppCompatResources.getDrawable(context, R.drawable.ic_plus_white))
+        }
+    }
 
+    private fun setupViewWithRecyclerView(context: Context, recyclerView: RecyclerView, items: List<StringBoolean>){
         recyclerView.layoutManager = GridLayoutManager(context, 2)
         recyclerView.adapter = AddKptThoughtAdapter(items)
     }
 
-    private fun setupKptOptionView(parentView: View, name: String){
+    private fun setupKptOptionView(parentView: View, name: String, context: Context){
         val option_add_minimized = parentView.findViewById<ConstraintLayout>(R.id.option_add_minimized)
         option_add_minimized.findViewById<TextView>(R.id.text)
             .apply {
@@ -120,12 +128,15 @@ class UiKptRecordHelper @Inject constructor (
 
         val content = parentView.findViewById<LinearLayout>(R.id.content)
 
+        val imageView = option_add_minimized
+            .findViewById<ImageView>(R.id.image_view)
+
         option_add_minimized
             .findViewById<FrameLayout>(R.id.frameLayout)
             .findViewById<Button>(R.id.button)
             .apply {
                 setOnClickListener {
-                    onMinimizeButtonClick(content)
+                    onMinimizeButtonClick(content, imageView, context)
                 }
             }
     }
@@ -216,7 +227,8 @@ class UiKptRecordHelper @Inject constructor (
         return if(result.isEmpty()) null else result
     }
 
-    private fun onMinimizeButtonClick(content: LinearLayout){
+    private fun onMinimizeButtonClick(content: LinearLayout, imageView: ImageView, context: Context){
         content.visibility = if(content.visibility == View.GONE) View.VISIBLE else View.GONE
+//        setMinimizeButtonDrawable(visible = content.visibility == View.VISIBLE, imageView, context)
     }
 }

@@ -3,11 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/drawable/button.xml" value="0.16927083333333334" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/drawable/element_background.xml" value="0.16927083333333334" />
+        <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/drawable/ic_add1.xml" value="0.16927083333333334" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/dialog_picker.xml" value="0.153125" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/el1_1.xml" value="0.153125" />
+        <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/el3.xml" value="0.153125" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/fragment_add_kpt_thought.xml" value="0.14479166666666668" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/fragment_main.xml" value="0.1621376811594203" />
+        <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/option_add_minimized.xml" value="0.153125" />
         <entry key="..\:/AndroidStudioProjects/Ktp/app/src/main/res/layout/option_add_with_text.xml" value="0.14479166666666668" />
       </map>
     </option>

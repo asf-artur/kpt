@@ -1,11 +1,14 @@
 package com.example.ktp.ui.fragments
 
+import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.example.ktp.App
@@ -15,6 +18,7 @@ import com.example.ktp.databinding.FragmentFullInfoKptRecordBinding
 import com.example.ktp.databinding.OptionAddWithNumbersBinding
 import com.example.ktp.databinding.OptionAddWithTextBinding
 import com.example.ktp.databinding.OptionAddWithWordsBinding
+import com.example.ktp.model.KptRecord
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.StringBoolean
 import com.example.ktp.model.toRusString
@@ -69,8 +73,9 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
                     topAppBar.setOnMenuItemClickListener {
                         when(it.itemId){
                             R.id.item1 -> {
-                                fullInfoKptRecordFragmentViewModel.deleteItem(kptRecord)
-                                fragmentTransactions.goToFragment(MainFragment())
+                                deleteDialog(kptRecord)
+//                                fullInfoKptRecordFragmentViewModel.deleteItem(kptRecord)
+//                                fragmentTransactions.goToFragment(MainFragment())
                                 true
                             }
                             else -> false
@@ -141,6 +146,24 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
         super.onDestroy()
 
         disposable.dispose()
+    }
+
+    private fun deleteDialog(kptRecord: KptRecord){
+        AlertDialog.Builder(requireContext())
+            .setTitle("Удалить?")
+            .setMessage("Удалить??????")
+            .setNegativeButton("YESS", object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    fullInfoKptRecordFragmentViewModel.deleteItem(kptRecord)
+                    fragmentTransactions.goToFragment(MainFragment())
+                }
+            })
+            .setPositiveButton("NO", object : DialogInterface.OnClickListener{
+                override fun onClick(dialog: DialogInterface?, which: Int) {
+                    dialog!!.cancel()
+                }
+            })
+            .show()
     }
 
     private fun setText(parentBinding: OptionAddWithTextBinding, text: String){
