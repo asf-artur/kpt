@@ -64,10 +64,7 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ kptRecord ->
 
-                    val topAppBar = view
-                        .findViewById<FrameLayout>(R.id.top_app_bar)
-                        .findViewById<AppBarLayout>(R.id.appBarLayout)
-                        .findViewById<MaterialToolbar>(R.id.materialToolbar)
+                    val topAppBar = binding.topAppBar.materialToolbar
                     topAppBar.inflateMenu(R.menu.full_info_app_bar)
                     topAppBar.setOnMenuItemClickListener {
                         when(it.itemId){
@@ -122,6 +119,7 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
 
                     kptRecord.truthOfThought?.let {
                         setNumbers(binding.truthOfThought, it)
+                        binding.truthOfThought.seekbar.progress = it.toInt()
                     }
                     kptRecord.emotionalReactions?.let {
                         setWords(binding.emotionalReactions, it, emotionalReactionsMap)

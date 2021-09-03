@@ -3,6 +3,7 @@ package com.example.ktp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.example.ktp.model.services.KptFilterService
 import com.example.ktp.model.KptRecord
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity(), IFragmentTransactions {
         setContentView(R.layout.activity_main)
 
         App.daggerAppComponent.inject(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //        fillKptDb()
 //        kptRecordRepository.deleteAll()
 

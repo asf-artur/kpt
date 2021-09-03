@@ -22,6 +22,10 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import javax.inject.Inject
 
+/**
+ * Класс, который помогает отобразить названия для полей и элементов при редактировании или создании записи КПТ.
+ * Нужен из-за того, что одиноаковые операции происходят для 2 фрагментов
+ */
 class UiKptRecordHelper @Inject constructor (
     private val kptRecordRepository: KptRecordRepository
     )
@@ -141,8 +145,6 @@ class UiKptRecordHelper @Inject constructor (
         val situationEditText = situationView.editText
 
         if(situationEditText.text.toString().isNotEmpty()){
-            Snackbar.make(view, "Добавлено", Snackbar.LENGTH_SHORT).show()
-
             val situation = getText(situationView)!!
             val automaticThought = getText(automaticThoughtView)
             val emotionalReactions = getStringList(emotionalReactionsMap)
@@ -163,13 +165,17 @@ class UiKptRecordHelper @Inject constructor (
                 Calendar.getInstance()
             )
 
+            var message = "Добавлено"
             if(oldKptRecord != null){
+                message = "Сохранено"
                 kptRecord.id = oldKptRecord.id
                 kptRecordRepository.update(kptRecord)
             }
             else{
                 kptRecordRepository.add(kptRecord)
             }
+
+            Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 
             goToFragment(MainFragment())
         }
