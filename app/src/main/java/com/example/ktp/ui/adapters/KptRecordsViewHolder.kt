@@ -27,7 +27,8 @@ class KptRecordsAdapter(val kptRecords: List<KptRecord>,
             val expandButton = itemView.findViewById<ImageButton>(R.id.expand_button)
             val progress = itemView.findViewById<CircularProgressIndicator>(R.id.progress)
 
-            constraintLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
+            // TODO: Проверить как это работает
+//            constraintLayout.layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 
             mainTextView.text = kptRecord.situation
             dateTextView.text = kptRecord.changeDate.toDate2DigitsString()
