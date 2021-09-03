@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ktp.App
@@ -14,6 +13,8 @@ import com.example.ktp.R
 import com.example.ktp.constants.EmotionalReactionsConstants
 import com.example.ktp.constants.ThinkingErrorsConstants
 import com.example.ktp.databinding.FragmentAddKptThoughtBinding
+import com.example.ktp.databinding.OptionAddWithNumbersBinding
+import com.example.ktp.databinding.OptionAddWithTextBinding
 import com.example.ktp.model.KptRecord
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.KptRecordRepository
@@ -49,10 +50,10 @@ class AddKptThoughtFragment : BaseFragmentWithBinding<FragmentAddKptThoughtBindi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        createAllKptOptions(view)
+        createAllKptOptions()
     }
 
-    private fun createAllKptOptions(view: View){
+    private fun createAllKptOptions(){
         val optionViewList = mutableListOf<LinearLayout>()
         val namesList = listOf(
                 resources.getString(R.string.situation),
@@ -65,23 +66,19 @@ class AddKptThoughtFragment : BaseFragmentWithBinding<FragmentAddKptThoughtBindi
         )
 
         val situationView = binding.situation
-        situationView.content
+        binding.situation.content
                 .apply {
                     visibility = View.VISIBLE
                 }
         optionViewList.add(situationView.root)
 
-        val automaticThought = view.findViewById<LinearLayout>(R.id.automaticThought)
-        optionViewList.add(automaticThought)
+        val automaticThought = binding.automaticThought
+        optionViewList.add(automaticThought.root)
 
-        val truthOfThought = view.findViewById<LinearLayout>(R.id.truthOfThought)
-        optionViewList.add(truthOfThought)
-        val numbers = truthOfThought
-                .findViewById<LinearLayout>(R.id.content)
-                .findViewById<TextView>(R.id.numbers)
-        truthOfThought
-                .findViewById<LinearLayout>(R.id.content)
-                .findViewById<SeekBar>(R.id.seekbar)
+        val truthOfThought = binding.truthOfThought
+        optionViewList.add(truthOfThought.root)
+        val numbers = binding.truthOfThought.numbers
+        binding.truthOfThought.seekbar
                 .apply {
                     setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener{
                         override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
@@ -96,46 +93,41 @@ class AddKptThoughtFragment : BaseFragmentWithBinding<FragmentAddKptThoughtBindi
                     })
                 }
 
-        val emotionalReactions = view.findViewById<LinearLayout>(R.id.emotionalReactions)
+        val emotionalReactions = binding.emotionalReactions.root
         optionViewList.add(emotionalReactions)
         setupViewWithRecyclerView(emotionalReactions, emotionalReactionsMap, this::onClickRecyclerViewItemEmotionalReactions)
 
-        val bodilyReactions = view.findViewById<LinearLayout>(R.id.bodilyReactions)
-        optionViewList.add(bodilyReactions)
+        val bodilyReactions = binding.bodilyReactions
+        optionViewList.add(bodilyReactions.root)
 
-        val behavior = view.findViewById<LinearLayout>(R.id.behavior)
-        optionViewList.add(behavior)
+        val behavior = binding.behavior
+        optionViewList.add(behavior.root)
 
-        val thinkingErrors = view.findViewById<LinearLayout>(R.id.thinkingErrors)
+        val thinkingErrors = binding.thinkingErrors.root
         optionViewList.add(thinkingErrors)
         setupViewWithRecyclerView(thinkingErrors, thinkingErrorsMap, this::onClickRecyclerViewItemThinkingErrors)
+
 
         for (i in optionViewList.indices){
             setupKptOptionView(optionViewList[i], namesList[i])
         }
 
-        val finishButton = view
-                .findViewById<LinearLayout>(R.id.mainLinearLayout)
-                .findViewById<FrameLayout>(R.id.mainFrameLayout)
-                .findViewById<Button>(R.id.finish)
+        val finishButton = binding.finish
         finishButton.setOnClickListener {
-            onClickFinish(situationView.root, automaticThought, truthOfThought, emotionalReactions, bodilyReactions, behavior, thinkingErrors)
+            onClickFinish(situationView, automaticThought, truthOfThought, bodilyReactions, behavior)
         }
     }
 
     private fun onClickFinish(
-            situationView: LinearLayout,
-            automaticThoughtView: LinearLayout,
-            truthOfThoughtView: LinearLayout,
-            emotionalReactionsView: LinearLayout,
-            bodilyReactionsView: LinearLayout,
-            behaviorView: LinearLayout,
-            thinkingErrorsView: LinearLayout,
+            situationView: OptionAddWithTextBinding,
+            automaticThoughtView: OptionAddWithTextBinding,
+            truthOfThoughtView: OptionAddWithNumbersBinding,
+            bodilyReactionsView: OptionAddWithTextBinding,
+            behaviorView: OptionAddWithTextBinding,
     ){
-        val content = situationView.findViewById<LinearLayout>(R.id.content)
+        val situationEditText = situationView.editText
 
-        val editText = content.findViewById<EditText>(R.id.edit_text)
-        if(editText.text.toString().isNotEmpty()){
+        if(situationEditText.text.toString().isNotEmpty()){
             Snackbar.make(requireView(), "Добавлено", Snackbar.LENGTH_SHORT).show()
 
             val situation = getText(situationView)!!
@@ -166,19 +158,13 @@ class AddKptThoughtFragment : BaseFragmentWithBinding<FragmentAddKptThoughtBindi
         }
     }
 
-    private fun getText(parentView: View): String? {
-        val content = parentView.findViewById<LinearLayout>(R.id.content)
-        val editText = content.findViewById<EditText>(R.id.edit_text)
-        val result = editText.text.toString()
-
+    private fun getText(parentBinding: OptionAddWithTextBinding): String? {
+        val result = parentBinding.editText.text.toString()
         return if(result.isEmpty()) null else result
      }
 
-    private fun getDouble(parentView: View): Double? {
-        val content = parentView.findViewById<LinearLayout>(R.id.content)
-        val numbers = content.findViewById<TextView>(R.id.numbers)
-        val double = numbers.text.removeSuffix("%").toString()
-
+    private fun getDouble(parentBinding: OptionAddWithNumbersBinding): Double? {
+        val double = parentBinding.numbers.text.removeSuffix("%").toString()
         return double.toDoubleOrNull()
     }
 

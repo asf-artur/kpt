@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragmentWithBinding<T : ViewBinding>(layoutId: Int) : Fragment(layoutId) {
-    var _binding: T? = null
+    private var _binding: T? = null
     val binding: T
     get() = _binding!!
 
