@@ -1,7 +1,9 @@
 package com.example.ktp.ui
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import com.example.ktp.App
 import com.example.ktp.R
 import com.example.ktp.constants.EmotionalReactionsConstants
 import com.example.ktp.constants.ThinkingErrorsConstants
+import com.example.ktp.databinding.FragmentAddKptThoughtBinding
 import com.example.ktp.model.KptRecord
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.KptRecordRepository
@@ -21,9 +24,12 @@ import com.google.android.material.snackbar.Snackbar
 import java.util.*
 import javax.inject.Inject
 
-class AddKptThoughtFragment : Fragment(R.layout.fragment_add_kpt_thought) {
+class AddKptThoughtFragment : BaseFragmentWithBinding<FragmentAddKptThoughtBinding>(R.layout.fragment_add_kpt_thought) {
     @Inject lateinit var kptRecordRepository: KptRecordRepository
     lateinit var fragmentTransactions: IFragmentTransactions
+
+    override var inflateFunc: (inflater: LayoutInflater, parent: ViewGroup?, attachToParent: Boolean) -> FragmentAddKptThoughtBinding
+        = FragmentAddKptThoughtBinding::inflate
 
     val emotionalReactionsMap = EmotionalReactionsConstants.Value
         .map {
@@ -58,12 +64,12 @@ class AddKptThoughtFragment : Fragment(R.layout.fragment_add_kpt_thought) {
                 resources.getString(R.string.thinkingErrors),
         )
 
-        val situationView = view.findViewById<LinearLayout>(R.id.situation)
-        situationView.findViewById<LinearLayout>(R.id.content)
+        val situationView = binding.situation
+        situationView.content
                 .apply {
                     visibility = View.VISIBLE
                 }
-        optionViewList.add(situationView)
+        optionViewList.add(situationView.root)
 
         val automaticThought = view.findViewById<LinearLayout>(R.id.automaticThought)
         optionViewList.add(automaticThought)
@@ -113,7 +119,7 @@ class AddKptThoughtFragment : Fragment(R.layout.fragment_add_kpt_thought) {
                 .findViewById<FrameLayout>(R.id.mainFrameLayout)
                 .findViewById<Button>(R.id.finish)
         finishButton.setOnClickListener {
-            onClickFinish(situationView, automaticThought, truthOfThought, emotionalReactions, bodilyReactions, behavior, thinkingErrors)
+            onClickFinish(situationView.root, automaticThought, truthOfThought, emotionalReactions, bodilyReactions, behavior, thinkingErrors)
         }
     }
 
