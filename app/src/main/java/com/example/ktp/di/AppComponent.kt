@@ -6,6 +6,7 @@ import com.example.ktp.model.repository.KptRecordRepository
 import com.example.ktp.ui.AddKptThoughtFragment
 import com.example.ktp.ui.FullInfoKptRecordFragment
 import com.example.ktp.ui.MainFragment
+import com.example.ktp.utils.UiKptRecordHelper
 import com.example.ktp.viewmodels.FullInfoKptRecordFragmentViewModel
 import com.example.ktp.viewmodels.MainFragmentViewModel
 import com.example.ktp.viewmodels.StatisticsFragmentViewModel
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(fullInfoKptRecordFragmentViewModel: FullInfoKptRecordFragmentViewModel)
     fun inject(fullInfoKptRecordFragment: FullInfoKptRecordFragment)
     fun inject(statisticsFragmentViewModel: StatisticsFragmentViewModel)
+//    fun inject(uiKptRecordHelper: UiKptRecordHelper)
 }
