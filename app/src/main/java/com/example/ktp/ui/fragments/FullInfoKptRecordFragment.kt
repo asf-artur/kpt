@@ -14,10 +14,7 @@ import androidx.fragment.app.viewModels
 import com.example.ktp.App
 import com.example.ktp.R
 import com.example.ktp.constants.EmotionalReactionsConstants
-import com.example.ktp.databinding.FragmentFullInfoKptRecordBinding
-import com.example.ktp.databinding.OptionAddWithNumbersBinding
-import com.example.ktp.databinding.OptionAddWithTextBinding
-import com.example.ktp.databinding.OptionAddWithWordsBinding
+import com.example.ktp.databinding.*
 import com.example.ktp.model.KptRecord
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.repository.StringBoolean
@@ -28,6 +25,7 @@ import com.example.ktp.utils.UiKptRecordHelper
 import com.example.ktp.viewmodels.FullInfoKptRecordFragmentViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import javax.inject.Inject
@@ -35,6 +33,7 @@ import javax.inject.Inject
 private const val KptRecordId = "KptRecordId"
 class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRecordBinding>(R.layout.fragment_full_info_kpt_record) {
     @Inject lateinit var uiKptRecordHelper: UiKptRecordHelper
+    lateinit var dialogBinding: Dialog1Binding
 
     val emotionalReactionsMap = EmotionalReactionsConstants.Value
         .map {
@@ -56,6 +55,16 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
 
         App.daggerAppComponent.inject(this)
         fragmentTransactions = activity as IFragmentTransactions
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        dialogBinding = Dialog1Binding.inflate(inflater, container, false)
+
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -149,21 +158,27 @@ class FullInfoKptRecordFragment : BaseFragmentWithBinding<FragmentFullInfoKptRec
     }
 
     private fun deleteDialog(kptRecord: KptRecord){
-        AlertDialog.Builder(requireContext())
+        val dialogView = dialogBinding.root
+
+        val al = AlertDialog.Builder(requireContext())
             .setTitle("Удалить?")
             .setMessage("Удалить??????")
-            .setNegativeButton("YESS", object : DialogInterface.OnClickListener{
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    fullInfoKptRecordFragmentViewModel.deleteItem(kptRecord)
-                    fragmentTransactions.goToFragment(MainFragment())
-                }
-            })
-            .setPositiveButton("NO", object : DialogInterface.OnClickListener{
-                override fun onClick(dialog: DialogInterface?, which: Int) {
-                    dialog!!.cancel()
-                }
-            })
+            .setView(dialogView)
+            .setCancelable(true)
+            .setOnCancelListener {
+                ((dialogView.parent) as ViewGroup).removeAllViews()
+            }
             .show()
+
+        dialogBinding.no.setOnClickListener {
+            al.cancel()
+        }
+        dialogBinding.yes.setOnClickListener {
+            fullInfoKptRecordFragmentViewModel.deleteItem(kptRecord)
+            al.cancel()
+            Snackbar.make(requireView(), "Удалено", Snackbar.LENGTH_SHORT).show()
+            fragmentTransactions.goToFragment(MainFragment())
+        }
     }
 
     private fun setText(parentBinding: OptionAddWithTextBinding, text: String){
