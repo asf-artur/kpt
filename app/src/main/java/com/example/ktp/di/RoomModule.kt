@@ -9,12 +9,6 @@ import javax.inject.Singleton
 
 @Module
 class RoomModule {
-//    @Provides
-//    @Singleton
-//    fun providesKptRecordTypeConverters(gson: Gson): KptRecordTypeConverters {
-//        return KptRecordTypeConverters(gson)
-//    }
-
     @Provides
     @Singleton
     fun prov(): KptRecordRepository{

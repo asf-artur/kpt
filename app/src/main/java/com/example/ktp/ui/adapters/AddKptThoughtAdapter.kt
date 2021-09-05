@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ktp.R
 import com.example.ktp.model.repository.StringBoolean
 
-class AddKptThoughtAdapter(val items: List<StringBoolean>, val onToggleButtonClick: (item: String, selected: Boolean) -> Unit) : RecyclerView.Adapter<AddKptThoughtAdapter.AddKptThoughtViewHolder>() {
+class AddKptThoughtAdapter(val items: List<StringBoolean>) : RecyclerView.Adapter<AddKptThoughtAdapter.AddKptThoughtViewHolder>() {
 
     inner class AddKptThoughtViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(item: StringBoolean, position: Int){
@@ -18,7 +18,7 @@ class AddKptThoughtAdapter(val items: List<StringBoolean>, val onToggleButtonCli
                 toggleButton.textOff = this
                 toggleButton.textOn = this
                 toggleButton.setOnCheckedChangeListener { buttonView, isChecked ->
-                    onToggleButtonClick(this, isChecked)
+                    items[position].checked = isChecked
                 }
             }
             if(item.checked){

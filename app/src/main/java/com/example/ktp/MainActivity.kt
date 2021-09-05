@@ -3,20 +3,20 @@ package com.example.ktp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.example.ktp.model.KptFilterService
+import com.example.ktp.model.services.KptFilterService
 import com.example.ktp.model.KptRecord
-import com.example.ktp.model.KptSortService
+import com.example.ktp.model.services.KptSortService
 import com.example.ktp.model.ThinkingError
 import com.example.ktp.model.kpt_filter.KptFilterText
 import com.example.ktp.model.kpt_filter.KptFilterType
 import com.example.ktp.model.kpt_sort.KptSort
 import com.example.ktp.model.kpt_sort.KptSortType
 import com.example.ktp.model.repository.KptRecordRepository
-import com.example.ktp.ui.AddKptThoughtFragment
 import com.example.ktp.ui.IFragmentTransactions
-import com.example.ktp.ui.MainFragment
-import com.example.ktp.ui.StatisticsFragment
+import com.example.ktp.ui.fragments.MainFragment
+import com.example.ktp.ui.fragments.StatisticsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 import javax.inject.Inject
@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity(), IFragmentTransactions {
         setContentView(R.layout.activity_main)
 
         App.daggerAppComponent.inject(this)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 //        fillKptDb()
 //        kptRecordRepository.deleteAll()
 

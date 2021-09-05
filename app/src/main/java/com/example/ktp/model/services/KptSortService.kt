@@ -1,5 +1,6 @@
-package com.example.ktp.model
+package com.example.ktp.model.services
 
+import com.example.ktp.model.KptRecord
 import com.example.ktp.model.kpt_sort.KptSort
 import com.example.ktp.model.kpt_sort.KptSortType
 import java.lang.Exception

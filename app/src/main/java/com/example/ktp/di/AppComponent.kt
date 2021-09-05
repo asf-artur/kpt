@@ -3,9 +3,9 @@ package com.example.ktp.di
 import com.example.ktp.MainActivity
 import com.example.ktp.database.KptRecordTypeConverters
 import com.example.ktp.model.repository.KptRecordRepository
-import com.example.ktp.ui.AddKptThoughtFragment
-import com.example.ktp.ui.FullInfoKptRecordFragment
-import com.example.ktp.ui.MainFragment
+import com.example.ktp.ui.fragments.AddKptThoughtFragment
+import com.example.ktp.ui.fragments.FullInfoKptRecordFragment
+import com.example.ktp.ui.fragments.MainFragment
 import com.example.ktp.viewmodels.FullInfoKptRecordFragmentViewModel
 import com.example.ktp.viewmodels.MainFragmentViewModel
 import com.example.ktp.viewmodels.StatisticsFragmentViewModel

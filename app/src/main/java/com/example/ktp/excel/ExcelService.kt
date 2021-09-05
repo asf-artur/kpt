@@ -2,6 +2,7 @@ package com.example.ktp.excel
 
 import com.example.ktp.constants.ExcelHeadersConstants
 import com.example.ktp.model.KptRecord
+import com.example.ktp.model.toRusString
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -41,12 +42,11 @@ class ExcelService {
         setCell(kptRecord.bodilyReactions)
         setCell(kptRecord.behavior)
         setCell(kptRecord.truthOfThought?.toString() ?: "0.0")
-        setCellList(kptRecord.thinkingErrors?.map { it.toString() })
+        setCellList(kptRecord.thinkingErrors?.map { it.toRusString() })
     }
 
     private fun createHeaderRow(sheet: XSSFSheet){
         val row = sheet.createRow(0)
-        val lastCellNum = 0
         val setCell = { value: String? -> row.createCell(row.physicalNumberOfCells).apply { setCellValue(value) } }
 
         ExcelHeadersConstants.Headers.forEach {
